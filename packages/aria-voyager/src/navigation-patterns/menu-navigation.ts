@@ -27,6 +27,12 @@ function getMenuFromItem(item: Item): MenuElement | null {
   ) as MenuElement | null;
 }
 
+function getTriggerFromMenu(item: MenuElement): HTMLElement | null {
+  return document.querySelector(
+    `[popovertarget="${menu.id}"]`
+  )
+}
+
 export class MenuNavigation implements NavigationPattern {
   eventListeners: EventNames[] = ['keydown', 'toggle', 'pointerover', 'pointerout', 'pointerup'];
 
@@ -117,13 +123,8 @@ export class MenuNavigation implements NavigationPattern {
 
     // ... and out
     else if (event.type === 'pointerout') {
-      // moving pointer from menu to trigger
-      if (
-        target === this.control.element &&
-        event.relatedTarget === (this.control.element as MenuElement)[OPENER]
-      ) {
-        (event.relatedTarget as HTMLElement).focus();
-      }
+      const trigger = getTriggerFromMenu(this.control.element)
+      trigger?.focus()
     }
 
     // close on invocation
