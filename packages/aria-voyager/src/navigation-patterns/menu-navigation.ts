@@ -123,8 +123,16 @@ export class MenuNavigation implements NavigationPattern {
 
     // ... and out
     else if (event.type === 'pointerout') {
-      const trigger = getTriggerFromMenu(this.control.element)
-      trigger?.focus()
+      // moving pointer from menu to triggerAdd commentMore actions
+      if (
+        target === this.control.element &&
+        event.relatedTarget === (this.control.element as MenuElement)[OPENER]
+      ) {
+        (event.relatedTarget as HTMLElement).focus();
+      } else
+        const trigger = getTriggerFromMenu(this.control.element);
+        trigger?.focus();
+      }
     }
 
     // close on invocation
