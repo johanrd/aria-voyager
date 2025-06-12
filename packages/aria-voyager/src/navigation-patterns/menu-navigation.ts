@@ -123,7 +123,7 @@ export class MenuNavigation implements NavigationPattern {
 
     // ... and out
     else if (event.type === 'pointerout') {
-      // moving pointer from menu to triggerAdd commentMore actions
+      // moving pointer from menu to trigger
       if (
         target === this.control.element &&
         event.relatedTarget === (this.control.element as MenuElement)[OPENER]
